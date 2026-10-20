@@ -43,7 +43,7 @@ export function Hero({ locations }: { locations: string[] }) {
       <Container className="pb-8 pt-36 sm:pb-12 lg:pt-20 xl:pt-0">
         <h1
           id="hero-heading"
-          className="max-w-6xl border text-5xl font-extrabold leading-[0.95] tracking-tighter sm:text-7xl lg:text-8xl"
+          className="max-w-6xl text-5xl font-extrabold leading-[0.95] tracking-tighter sm:text-7xl lg:text-8xl"
         >
           {HEADLINE.split(" ").map((word, i) => (
             <span
