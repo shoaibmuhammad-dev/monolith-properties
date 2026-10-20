@@ -9,8 +9,12 @@ export function StatsStrip() {
       <Container>
         <dl className="grid grid-cols-2 gap-y-12 lg:grid-cols-4">
           {siteConfig.stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08} className="border-l border-neutral-300 pl-6 sm:pl-8">
-              <dd className="font-heading text-4xl sm:text-5xl lg:text-7xl leading-none tracking-tight font-bold">
+            <Reveal
+              key={s.label}
+              delay={i * 0.08}
+              className="border-l border-neutral-300 pl-6 sm:pl-8"
+            >
+              <dd className="font-heading text-4xl font-bold leading-none tracking-tight sm:text-5xl lg:text-7xl">
                 <CountUp to={s.value} suffix={s.suffix} />
               </dd>
               <dt className="mt-3 max-w-[16ch] text-sm text-neutral-600">{s.label}</dt>

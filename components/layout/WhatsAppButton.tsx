@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { buildWhatsAppLink, getPageMessage } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/ui/Icons";
 import { useWhatsAppContext } from "./WhatsAppContext";
+import Link from "next/link";
 
 export function WhatsAppButton() {
   const pathname = usePathname();
@@ -12,16 +13,16 @@ export function WhatsAppButton() {
 
   return (
     <div className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-40">
-      <a
+      <Link
         href={href}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
-        className="group relative flex size-14 items-center justify-center rounded-full bg-black text-white shadow-[0_8px_30px_rgba(0,0,0,0.35)] ring-1 ring-white/70 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 sm:size-16"
+        className="group relative flex size-14 items-center justify-center rounded-full bg-green-600 text-white shadow-[0_8px_30px_rgba(0,0,0,0.35)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 sm:size-16"
       >
         <span
           aria-hidden="true"
-          className="absolute inset-0 -z-10 rounded-full bg-black animate-pulse-ring motion-reduce:hidden"
+          className="animate-pulse-ring absolute inset-0 -z-10 rounded-full bg-green-400 motion-reduce:hidden"
         />
         <WhatsAppIcon className="size-7 sm:size-8" />
         <span
@@ -30,7 +31,7 @@ export function WhatsAppButton() {
         >
           Chat with us
         </span>
-      </a>
+      </Link>
     </div>
   );
 }

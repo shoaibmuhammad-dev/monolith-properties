@@ -16,7 +16,7 @@ export function Section({ tone = "light", id, labelledBy, className, children }:
       aria-labelledby={labelledBy}
       className={cn(
         "relative py-20 sm:py-28 lg:py-36",
-        tone === "dark" ? "bg-black text-white" : "bg-white text-black",
+        tone === "dark" ? "bg-neutral-950 text-white" : "bg-white text-black",
         className,
       )}
     >

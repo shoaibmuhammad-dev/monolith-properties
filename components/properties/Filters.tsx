@@ -30,13 +30,23 @@ function FilterSelect({
   label,
   children,
   ...rest
-}: { id: string; label: string; children: React.ReactNode } & React.SelectHTMLAttributes<HTMLSelectElement>) {
+}: {
+  id: string;
+  label: string;
+  children: React.ReactNode;
+} & React.SelectHTMLAttributes<HTMLSelectElement>) {
   return (
     <div>
       <label htmlFor={id} className="mb-2 block text-sm font-medium">
         {label}
       </label>
-      <select id={id} name={id} className={selectClasses} style={{ backgroundImage: chevron }} {...rest}>
+      <select
+        id={id}
+        name={id}
+        className={selectClasses}
+        style={{ backgroundImage: chevron }}
+        {...rest}
+      >
         {children}
       </select>
     </div>
@@ -67,11 +77,20 @@ export function Filters({ filters, locations }: Props) {
       sort: String(data.get("sort") ?? ""),
     });
     const qs = filtersToSearchParams({ ...next, page: 1 }).toString();
-    startTransition(() => router.replace(qs ? `/properties?${qs}` : "/properties", { scroll: false }));
+    startTransition(() =>
+      router.replace(qs ? `/properties?${qs}` : "/properties", { scroll: false }),
+    );
   }
 
   const steps = purpose ? PRICE_STEPS[purpose] : [];
-  const activeCount = [filters.purpose, filters.type, filters.location, filters.minPrice, filters.maxPrice, filters.beds].filter(Boolean).length;
+  const activeCount = [
+    filters.purpose,
+    filters.type,
+    filters.location,
+    filters.minPrice,
+    filters.maxPrice,
+    filters.beds,
+  ].filter(Boolean).length;
 
   return (
     <div className="border border-neutral-200 bg-neutral-50 p-5 sm:p-6">
@@ -87,7 +106,10 @@ export function Filters({ filters, locations }: Props) {
           Filters{activeCount ? ` (${activeCount})` : ""}
         </button>
         {activeCount ? (
-          <Link href="/properties" className="min-h-11 content-center text-sm underline underline-offset-4">
+          <Link
+            href="/properties"
+            className="min-h-11 content-center text-sm underline underline-offset-4"
+          >
             Clear
           </Link>
         ) : null}
@@ -99,7 +121,10 @@ export function Filters({ filters, locations }: Props) {
         onChange={(e) => apply((e.target as HTMLSelectElement).name === "purpose")}
         onSubmit={(e) => e.preventDefault()}
         aria-busy={isPending}
-        className={cn("mt-5 grid gap-4 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4", open ? "grid" : "hidden lg:grid")}
+        className={cn(
+          "mt-5 grid gap-4 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4",
+          open ? "grid" : "hidden lg:grid",
+        )}
       >
         <FilterSelect
           id="purpose"
@@ -130,7 +155,11 @@ export function Filters({ filters, locations }: Props) {
           ))}
         </FilterSelect>
 
-        <FilterSelect id="beds" label="Bedrooms" defaultValue={filters.beds ? String(filters.beds) : ""}>
+        <FilterSelect
+          id="beds"
+          label="Bedrooms"
+          defaultValue={filters.beds ? String(filters.beds) : ""}
+        >
           <option value="">Any</option>
           {[1, 2, 3, 4, 5].map((n) => (
             <option key={n} value={n}>
@@ -143,7 +172,9 @@ export function Filters({ filters, locations }: Props) {
           key={`min-${purpose}`}
           id="minPrice"
           label="Min price (AED)"
-          defaultValue={filters.minPrice && steps.includes(filters.minPrice) ? String(filters.minPrice) : ""}
+          defaultValue={
+            filters.minPrice && steps.includes(filters.minPrice) ? String(filters.minPrice) : ""
+          }
           disabled={!purpose}
         >
           <option value="">{purpose ? "No minimum" : "Choose buy or rent first"}</option>
@@ -158,7 +189,9 @@ export function Filters({ filters, locations }: Props) {
           key={`max-${purpose}`}
           id="maxPrice"
           label="Max price (AED)"
-          defaultValue={filters.maxPrice && steps.includes(filters.maxPrice) ? String(filters.maxPrice) : ""}
+          defaultValue={
+            filters.maxPrice && steps.includes(filters.maxPrice) ? String(filters.maxPrice) : ""
+          }
           disabled={!purpose}
         >
           <option value="">{purpose ? "No maximum" : "Choose buy or rent first"}</option>
@@ -180,7 +213,7 @@ export function Filters({ filters, locations }: Props) {
         <div className="hidden items-end lg:flex">
           <Link
             href="/properties"
-            className="inline-flex min-h-12 w-full items-center justify-center rounded border border-black text-sm font-medium transition-colors hover:bg-black hover:text-white"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded border border-black text-sm font-medium transition-colors hover:bg-neutral-950 hover:text-white"
           >
             Reset filters
           </Link>

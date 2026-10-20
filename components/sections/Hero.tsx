@@ -24,7 +24,7 @@ export function Hero({ locations }: { locations: string[] }) {
       className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-black text-white"
     >
       <motion.div className="absolute inset-0 -z-10" style={reduce ? undefined : { y, scale }}>
-        <div className="absolute inset-0 animate-zoom-out">
+        <div className="animate-zoom-out absolute inset-0">
           <SmartImage
             src={HERO_IMAGE}
             alt="Dubai skyline at dusk with Downtown towers"
@@ -35,13 +35,25 @@ export function Hero({ locations }: { locations: string[] }) {
           />
         </div>
       </motion.div>
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/60 to-black/45" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/60 to-black/45"
+      />
 
-      <Container className="pb-8 pt-36 sm:pb-12">
-        <h1 id="hero-heading" className="max-w-6xl text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-tighter font-extrabold">
+      <Container className="pb-8 sm:pb-12">
+        <h1
+          id="hero-heading"
+          className="max-w-6xl text-5xl font-extrabold leading-[0.95] tracking-tighter sm:text-7xl lg:text-8xl"
+        >
           {HEADLINE.split(" ").map((word, i) => (
-            <span key={`${word}-${i}`} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
-              <span className="inline-block animate-rise" style={{ animationDelay: `${0.15 + i * 0.07}s` }}>
+            <span
+              key={`${word}-${i}`}
+              className="inline-block overflow-hidden pb-[0.12em] align-bottom"
+            >
+              <span
+                className="animate-rise inline-block"
+                style={{ animationDelay: `${0.15 + i * 0.07}s` }}
+              >
                 {word}
                 {"\u00A0"}
               </span>
@@ -49,13 +61,13 @@ export function Hero({ locations }: { locations: string[] }) {
           ))}
         </h1>
         <p
-          className="mt-8 max-w-xl animate-fade-up text-lg text-neutral-300"
+          className="animate-fade-up mt-8 max-w-xl text-lg text-neutral-300"
           style={{ animationDelay: "0.85s" }}
         >
-          Verified listings, fees in writing and licensed agents who reply within the hour. Buy, rent, sell and
-          manage property across Dubai and Abu Dhabi.
+          Verified listings, fees in writing and licensed agents who reply within the hour. Buy,
+          rent, sell and manage property across Dubai and Abu Dhabi.
         </p>
-        <div className="mt-10 animate-fade-up" style={{ animationDelay: "1.05s" }}>
+        <div className="animate-fade-up mt-10" style={{ animationDelay: "1.05s" }}>
           <HeroSearch locations={locations} />
         </div>
       </Container>

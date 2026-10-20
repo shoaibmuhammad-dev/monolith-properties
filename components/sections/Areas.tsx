@@ -22,7 +22,10 @@ export function Areas() {
           {areas.map((area) => {
             const count = countByArea(area.name);
             return (
-              <li key={area.name} className="w-[78vw] max-w-[380px] shrink-0 snap-start sm:w-[360px]">
+              <li
+                key={area.name}
+                className="w-[78vw] max-w-[380px] shrink-0 snap-start sm:w-[360px]"
+              >
                 <Link
                   href={`/properties?location=${encodeURIComponent(area.name)}`}
                   className="group relative block aspect-[4/5] overflow-hidden bg-neutral-200 text-white"
@@ -34,11 +37,18 @@ export function Areas() {
                     sizes="(min-width: 640px) 360px, 78vw"
                     className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
                   />
-                  <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"
+                  />
                   <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
                     <span>
-                      <span className="block font-heading text-2xl sm:text-3xl leading-tight tracking-tight font-bold">{area.name}</span>
-                      <span className="mt-2 block max-w-[28ch] text-sm text-neutral-300">{area.blurb}</span>
+                      <span className="font-heading block text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+                        {area.name}
+                      </span>
+                      <span className="mt-2 block max-w-[28ch] text-sm text-neutral-300">
+                        {area.blurb}
+                      </span>
                       <span className="mt-3 block text-sm font-medium">
                         {count} {count === 1 ? "listing" : "listings"}
                       </span>

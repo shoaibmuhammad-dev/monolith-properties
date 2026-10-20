@@ -12,7 +12,7 @@ const base =
 const variants: Record<Variant, string> = {
   primary: "bg-black text-white hover:bg-neutral-800",
   inverse: "bg-white text-black hover:bg-neutral-200",
-  outline: "border border-black text-black hover:bg-black hover:text-white",
+  outline: "border border-black text-black hover:bg-neutral-950 hover:text-white",
   "outline-inverse": "border border-white text-white hover:bg-white hover:text-black",
 };
 
@@ -71,7 +71,13 @@ export function Button({
   let node: React.ReactNode;
   if (href && external) {
     node = (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes} aria-label={ariaLabel}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+        aria-label={ariaLabel}
+      >
         {content}
       </a>
     );
@@ -83,12 +89,22 @@ export function Button({
     );
   } else {
     node = (
-      <button type={type} className={classes} disabled={disabled} aria-label={ariaLabel} onClick={onClick}>
+      <button
+        type={type}
+        className={classes}
+        disabled={disabled}
+        aria-label={ariaLabel}
+        onClick={onClick}
+      >
         {content}
       </button>
     );
   }
 
   if (!magnetic) return node;
-  return <Magnetic className={className?.includes("w-full") ? "block w-full" : undefined}>{node}</Magnetic>;
+  return (
+    <Magnetic className={className?.includes("w-full") ? "block w-full" : undefined}>
+      {node}
+    </Magnetic>
+  );
 }

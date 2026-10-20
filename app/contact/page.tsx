@@ -11,6 +11,7 @@ import { siteConfig } from "@/data/site";
 import { breadcrumbJsonLd, realEstateAgentJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 import { buildWhatsAppLink, getPageMessage } from "@/lib/whatsapp";
+import Link from "next/link";
 
 export const metadata = buildMetadata({
   title: "Contact our real estate agents in Dubai",
@@ -42,39 +43,54 @@ export default function ContactPage() {
       <section aria-label="Contact details and form" className="bg-white py-20 sm:py-28 lg:py-36">
         <Container className="grid gap-16 lg:grid-cols-[1.1fr_1fr]">
           <div>
-            <h2 className="text-2xl sm:text-3xl leading-tight tracking-tight font-bold">Send an enquiry</h2>
+            <h2 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+              Send an enquiry
+            </h2>
             <p className="mb-8 mt-3 max-w-prose text-neutral-600">
-              Share your budget, preferred areas and timeline. The more we know, the better the shortlist.
+              Share your budget, preferred areas and timeline. The more we know, the better the
+              shortlist.
             </p>
-            <EnquiryForm idPrefix="contact" submitLabel="Send message" whatsappHref={whatsappHref} />
+            <EnquiryForm
+              idPrefix="contact"
+              submitLabel="Send message"
+              whatsappHref={whatsappHref}
+            />
           </div>
 
           <div className="lg:pt-2">
-            <h2 className="text-2xl sm:text-3xl leading-tight tracking-tight font-bold">Visit or reach us</h2>
-            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className={buttonClasses("primary", "lg", "mt-8 w-full sm:w-auto")}>
+            <h2 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+              Visit or reach us
+            </h2>
+            <Link
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonClasses("primary", "lg", "mt-8 w-full sm:w-auto")}
+            >
               <WhatsAppIcon className="size-5" /> Chat on WhatsApp
-            </a>
+            </Link>
 
             <address className="mt-10 flex flex-col gap-6 not-italic">
-              <a href={`tel:${siteConfig.phoneHref}`} className="flex items-start gap-4">
+              <Link href={`tel:${siteConfig.phoneHref}`} className="flex items-start gap-4">
                 <Phone className="mt-1 size-5 shrink-0" aria-hidden="true" />
                 <span>
                   <span className="block text-sm text-neutral-500">Phone</span>
                   {siteConfig.phone}
                 </span>
-              </a>
-              <a href={`mailto:${siteConfig.email}`} className="flex items-start gap-4">
+              </Link>
+              <Link href={`mailto:${siteConfig.email}`} className="flex items-start gap-4">
                 <Mail className="mt-1 size-5 shrink-0" aria-hidden="true" />
                 <span>
                   <span className="block text-sm text-neutral-500">Email</span>
                   {siteConfig.email}
                 </span>
-              </a>
+              </Link>
               <p className="flex items-start gap-4">
                 <MapPin className="mt-1 size-5 shrink-0" aria-hidden="true" />
                 <span>
                   <span className="block text-sm text-neutral-500">Office</span>
-                  {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.country}
+                  {siteConfig.address.street}, {siteConfig.address.city},{" "}
+                  {siteConfig.address.country}
                 </span>
               </p>
               <div className="flex items-start gap-4">
@@ -91,7 +107,11 @@ export default function ContactPage() {
             </address>
 
             <div className="mt-10">
-              <MapEmbed lat={siteConfig.geo.lat} lng={siteConfig.geo.lng} title={`${siteConfig.name} office`} />
+              <MapEmbed
+                lat={siteConfig.geo.lat}
+                lng={siteConfig.geo.lng}
+                title={`${siteConfig.name} office`}
+              />
             </div>
           </div>
         </Container>

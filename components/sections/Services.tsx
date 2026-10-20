@@ -37,7 +37,9 @@ export function Services() {
                       className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-black transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100"
                     />
                     <Icon className="size-8" aria-hidden="true" strokeWidth={1.5} />
-                    <h3 className="mt-auto pt-12 text-2xl sm:text-3xl leading-tight tracking-tight font-bold">{s.title}</h3>
+                    <h3 className="mt-auto pt-12 text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+                      {s.title}
+                    </h3>
                     <p className="mt-3 text-base text-neutral-600 transition-colors duration-500 group-hover:text-neutral-300">
                       {s.description}
                     </p>

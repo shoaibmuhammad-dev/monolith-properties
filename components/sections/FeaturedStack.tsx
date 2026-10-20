@@ -52,7 +52,7 @@ function StackCard({
             <p className="text-sm text-neutral-600">
               {property.location.area}, {property.location.city}
             </p>
-            <h3 className="mt-3 text-2xl sm:text-3xl leading-tight tracking-tight font-bold">
+            <h3 className="mt-3 text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
               <Link
                 href={`/properties/${property.slug}`}
                 className="after:absolute after:inset-0 after:content-['']"
@@ -65,12 +65,15 @@ function StackCard({
             </p>
           </div>
           <div>
-            <p className="font-heading text-2xl sm:text-3xl leading-tight tracking-tight font-bold">{formatPrice(property.price, property.purpose)}</p>
+            <p className="font-heading text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+              {formatPrice(property.price, property.purpose)}
+            </p>
             <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 border-t border-neutral-200 pt-4 text-sm text-neutral-700">
               {residential ? (
                 <>
                   <li className="flex items-center gap-2">
-                    <BedDouble className="size-4" aria-hidden="true" /> {bedroomLabel(property.bedrooms)}
+                    <BedDouble className="size-4" aria-hidden="true" />{" "}
+                    {bedroomLabel(property.bedrooms)}
                   </li>
                   <li className="flex items-center gap-2">
                     <Bath className="size-4" aria-hidden="true" /> {property.bathrooms} baths
@@ -78,12 +81,17 @@ function StackCard({
                 </>
               ) : null}
               <li className="flex items-center gap-2">
-                <Maximize className="size-4" aria-hidden="true" /> {formatNumber(property.areaSqft)} sq ft
+                <Maximize className="size-4" aria-hidden="true" /> {formatNumber(property.areaSqft)}{" "}
+                sq ft
               </li>
             </ul>
           </div>
         </div>
-        <motion.div aria-hidden="true" style={{ opacity: dim }} className="pointer-events-none absolute inset-0 bg-black" />
+        <motion.div
+          aria-hidden="true"
+          style={{ opacity: dim }}
+          className="pointer-events-none absolute inset-0 bg-black"
+        />
       </motion.article>
     </div>
   );
@@ -119,7 +127,13 @@ export function FeaturedStack({ properties }: { properties: Property[] }) {
         <Container className="mt-14">
           <div ref={container} className="relative">
             {properties.map((p, i) => (
-              <StackCard key={p.id} property={p} index={i} total={properties.length} progress={scrollYProgress} />
+              <StackCard
+                key={p.id}
+                property={p}
+                index={i}
+                total={properties.length}
+                progress={scrollYProgress}
+              />
             ))}
           </div>
         </Container>

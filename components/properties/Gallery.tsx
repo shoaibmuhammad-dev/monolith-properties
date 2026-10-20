@@ -8,7 +8,15 @@ import { SmartImage } from "@/components/ui/SmartImage";
 // The lightbox is only needed once someone opens it.
 const Lightbox = dynamic(() => import("./Lightbox").then((m) => m.Lightbox), { ssr: false });
 
-export function Gallery({ images, title, location }: { images: string[]; title: string; location: string }) {
+export function Gallery({
+  images,
+  title,
+  location,
+}: {
+  images: string[];
+  title: string;
+  location: string;
+}) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
   const alt = `${title} in ${location}`;
@@ -70,14 +78,20 @@ export function Gallery({ images, title, location }: { images: string[]; title: 
         <button
           type="button"
           onClick={() => show(0)}
-          className="inline-flex min-h-11 items-center gap-2 rounded border border-black px-5 text-sm font-medium transition-colors hover:bg-black hover:text-white"
+          className="inline-flex min-h-11 items-center gap-2 rounded border border-black px-5 text-sm font-medium transition-colors hover:bg-neutral-950 hover:text-white"
         >
           <Images className="size-4" aria-hidden="true" /> View all {images.length} photos
         </button>
       </div>
 
       {open ? (
-        <Lightbox images={images} alt={alt} index={index} onIndexChange={setIndex} onClose={() => setOpen(false)} />
+        <Lightbox
+          images={images}
+          alt={alt}
+          index={index}
+          onIndexChange={setIndex}
+          onClose={() => setOpen(false)}
+        />
       ) : null}
     </>
   );
