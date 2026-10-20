@@ -118,7 +118,13 @@ export function Filters({ filters, locations }: Props) {
       <form
         id="property-filters"
         ref={formRef}
-        onChange={(e) => apply((e.target as HTMLSelectElement).name === "purpose")}
+        onChange={(e) => {
+          const target = e.target;
+
+          if (target instanceof HTMLSelectElement || target instanceof HTMLInputElement) {
+            apply(target.name === "purpose");
+          }
+        }}
         onSubmit={(e) => e.preventDefault()}
         aria-busy={isPending}
         className={cn(

@@ -10,7 +10,10 @@ const WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 const MAX_REQUESTS = 5;
 
 const escapeHtml = (value: string) =>
-  value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
+  value.replace(
+    /[&<>"']/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string,
+  );
 
 function row(label: string, value?: string) {
   if (!value) return "";
@@ -35,14 +38,23 @@ export async function POST(req: Request) {
   }
 
   // Honeypot: pretend success so bots learn nothing.
-  if (typeof body === "object" && body !== null && "website" in body && (body as { website?: unknown }).website) {
+  if (
+    typeof body === "object" &&
+    body !== null &&
+    "website" in body &&
+    (body as { website?: unknown }).website
+  ) {
     return NextResponse.json({ ok: true });
   }
 
   const parsed = apiSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
-      { ok: false, error: "Please check the form and try again.", fields: parsed.error.flatten().fieldErrors },
+      {
+        ok: false,
+        error: "Please check the form and try again.",
+        fields: parsed.error.flatten().fieldErrors,
+      },
       { status: 422 },
     );
   }
@@ -63,7 +75,10 @@ export async function POST(req: Request) {
           row("Phone", data.phone),
           row("Email", data.email || undefined),
           row("Property", data.propertyTitle),
-          row("Listing", data.propertySlug ? `${siteConfig.url}/properties/${data.propertySlug}` : undefined),
+          row(
+            "Listing",
+            data.propertySlug ? `${siteConfig.url}/properties/${data.propertySlug}` : undefined,
+          ),
           row("Message", data.message),
         ].join("");
 
@@ -77,7 +92,10 @@ export async function POST(req: Request) {
     }
     console.error("[enquiry] RESEND_API_KEY is missing in production.");
     return NextResponse.json(
-      { ok: false, error: "Our email service is temporarily unavailable. Please message us on WhatsApp." },
+      {
+        ok: false,
+        error: "Our email service is temporarily unavailable. Please message us on WhatsApp.",
+      },
       { status: 500 },
     );
   }
@@ -94,7 +112,10 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error("[enquiry] Failed to send email:", err);
     return NextResponse.json(
-      { ok: false, error: "We couldn't send your message. Please try again or contact us on WhatsApp." },
+      {
+        ok: false,
+        error: "We couldn't send your message. Please try again or contact us on WhatsApp.",
+      },
       { status: 502 },
     );
   }
