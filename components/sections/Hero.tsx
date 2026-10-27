@@ -21,7 +21,7 @@ export function Hero({ locations }: { locations: string[] }) {
     <section
       ref={ref}
       aria-labelledby="hero-heading"
-      className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-black text-white"
+      className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-black text-white"
     >
       <motion.div className="absolute inset-0 -z-10" style={reduce ? undefined : { y, scale }}>
         <div className="animate-zoom-out absolute inset-0">
@@ -40,7 +40,7 @@ export function Hero({ locations }: { locations: string[] }) {
         className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/60 to-black/45"
       />
 
-      <Container className="pb-8 pt-36 sm:pb-12 lg:pt-20 xl:pt-0">
+      <Container className="pb-8 pt-36 sm:pb-12 lg:pt-20 xl:pt-36">
         <h1
           id="hero-heading"
           className="max-w-6xl text-5xl font-extrabold leading-[0.95] tracking-tighter sm:text-7xl lg:text-8xl"
